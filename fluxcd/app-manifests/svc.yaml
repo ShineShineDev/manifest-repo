@@ -9,7 +9,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 300
+    targetPort: 3000
   selector:
     app: pos-api
   type: NodePort
