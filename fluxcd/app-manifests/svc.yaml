@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: pos-api
+  name: pos-api
+  namespace: pos-api
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 300
+  selector:
+    app: pos-api
+  type: NodePort
+status:
+  loadBalancer: {}
