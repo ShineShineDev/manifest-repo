@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pos-api
+  name: pos-api
+  namespace: pos-api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: pos-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: pos-api
+    spec:
+      containers:
+      - image: spideyshine/app-repo:sha-2821226
+        name: ngixn
+        resources: {}
+status: {}
