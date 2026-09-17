@@ -17,7 +17,7 @@ spec:
         app: pos-api
     spec:
       containers:
-      - image: spideyshine/app-repo:sha-6bcc9ac
+      - image: spideyshine/app-repo:sha-6be12c9
         name: ngixn
         resources: {}
 status: {}
