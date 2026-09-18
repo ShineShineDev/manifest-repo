@@ -1,0 +1,20 @@
+# ── values-dev.yaml ─────────────────────────────────────────────────────────
+# Development environment overrides for pos-api Helm chart.
+# Usage: helm upgrade --install pos-api ./helm -f helm/values-dev.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+replicaCount: 1
+
+image:
+  repository: spideyshine/app-repo
+  pullPolicy: Always
+  tag: "latest"
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 3000
+
+namespace:
+  create: true
+  name: pos-api-dev

@@ -1,0 +1,46 @@
+# ── values-prod.yaml ────────────────────────────────────────────────────────
+# Production environment overrides for pos-api Helm chart.
+# Usage: helm upgrade --install pos-api ./helm -f helm/values-prod.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+replicaCount: 3
+
+image:
+  repository: spideyshine/app-repo
+  pullPolicy: IfNotPresent
+  tag: "sha-d5594a2"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: pos-api.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+namespace:
+  create: true
+  name: pos-api

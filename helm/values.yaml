@@ -1,0 +1,86 @@
+# Default values for pos-api Helm chart.
+# Override these values in your environment-specific values files.
+
+# -- Number of pod replicas
+replicaCount: 1
+
+image:
+  # -- Container image repository
+  repository: spideyshine/app-repo
+  # -- Image pull policy
+  pullPolicy: IfNotPresent
+  # -- Image tag (overridden by CI/CD)
+  tag: "sha-d5594a2"
+
+# -- Image pull secrets for private registries
+imagePullSecrets: []
+
+# -- Override the chart name
+nameOverride: ""
+# -- Override the full release name
+fullnameOverride: ""
+
+serviceAccount:
+  # -- Create a ServiceAccount
+  create: false
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- ServiceAccount name (auto-generated if empty)
+  name: ""
+
+# -- Pod annotations
+podAnnotations: {}
+
+# -- Pod security context
+podSecurityContext: {}
+
+# -- Container security context
+securityContext: {}
+
+service:
+  # -- Service type
+  type: NodePort
+  # -- Service port exposed
+  port: 80
+  # -- Target container port
+  targetPort: 3000
+
+ingress:
+  # -- Enable Ingress
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: pos-api.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  # -- Resource limits
+  limits: {}
+  # -- Resource requests
+  requests: {}
+
+autoscaling:
+  # -- Enable HorizontalPodAutoscaler
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+
+# -- Node selector for pod scheduling
+nodeSelector: {}
+
+# -- Tolerations for pod scheduling
+tolerations: []
+
+# -- Affinity rules for pod scheduling
+affinity: {}
+
+namespace:
+  # -- Create the namespace
+  create: true
+  # -- Namespace name
+  name: pos-api
